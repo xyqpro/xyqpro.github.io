@@ -408,7 +408,7 @@ fieldset[disabled] a.btn {
 }
 
 .btn-warn {
-  color: #000;
+  color: #ffffff;
   background-color: red;
   border-color: red;
   width: 100%;
@@ -416,44 +416,44 @@ fieldset[disabled] a.btn {
 }
 
 .btn-primary {
-  color: #000;
-  background: #009100;
+  color: #ffffff;
+  background: #031a46;
   width: 100%;
   margin: 10px 0;
 }
 
 .btn-primary:focus,
 .btn-primary.focus {
-  color: #000;
-  background-color: #FFFF00;
-  border-color: #009100;
+  color: #ffffff;
+  background-color: #4979ce;
+  border-color: #031a46;
 }
 
 .btn-primary:hover {
-  color: #000;
-  background-color: #FFFF00;
-  border-color: #009100;
+  color: #ffffff;
+  background-color: #4979ce;
+  border-color: #031a46;
 }
 
 .btn-primary:active,
 .btn-primary.active {
   color: #fff;
-  background-color: #FFFF00;
-  border-color: #009100;
+  background-color: #4979ce;
+  border-color: #031a46;
 }
 
 .btn-success {
-  color: #000;
-  background-color: #FFFF00;
-  border-color: #009100;
+  color: #ffffff;
+  background-color: #4979ce;
+  border-color: #031a46;
   width: 100%;
   margin: 5px 0;
 }
 
 .btn-success:hover {
-  color: #000;
-  background-color: #FFFF00;
-  border-color: #009100;
+  color: #ffffff;
+  background-color: #4979ce;
+  border-color: #031a46;
 }
 
 .btn-lg,
@@ -630,7 +630,7 @@ fieldset[disabled] a.btn {
 }
 
 footer {
-  background: #000;
+  background: #ffffff;
   margin-top: 30px;
   color: #fff;
   line-height: 30px;
@@ -668,7 +668,7 @@ footer a {
   left: 50%;
   top: 25%;
   margin-left: -250px;
-  border: 0px solid #000000;
+  border: 0px solid #ff4979ce0;
 }
 
 .right {
@@ -688,7 +688,7 @@ footer a {
 
 .box6 {
   border-radius: 10px 10px 10px 10px;
-  border: 0px solid #000;
+  border: 0px solid #ffffff;
   width: auto;
   height: auto;
   margin: 0 auto
@@ -700,7 +700,7 @@ footer a {
 
 .box8 {
   border-radius: 10px 10px 10px 10px;
-  border: 0px solid #000;
+  border: 0px solid #ffffff;
   width: auto;
   height: auto;
   margin: 0 auto
@@ -766,7 +766,7 @@ img {
 
 .lb2 {
   width: 100%;
-  background-color: #009100;
+  background-color: #031a46;
   font-size: 12px;
   line-height: 20px;
   margin: 5px 0;
@@ -792,7 +792,7 @@ img {
   height: calc((2436px / 4.5) + 15px);
   background: #fff;
   border-radius: 10px;
-  box-shadow: #000 0px 0px 14px -3px;
+  box-shadow: #ffffff 0px 0px 14px -3px;
   box-sizing: border-box;
   padding: 7px;
   z-index: 9999;
