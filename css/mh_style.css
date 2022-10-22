@@ -1,7 +1,7 @@
 html,body {line-height:0;}
 body {background:#fff;}
 body,h1,h2,h3,h4,h5,h6,ul,ol,dl,dd,p {margin:0;}
-body,h1,input,button,select,textarea {font-family:"Microsoft Yahei","PingFang SC","Helvetica Neue",serif;font-size:.28rem;color:#ffffff;}
+body,h1,input,button,select,textarea {font-family:"思源黑体 CN","PingFang SC","Helvetica Neue",serif;font-size:.28rem;color:#b0c2eb;}
 input,button,select,textarea {border:none;outline:none;}
 input,button,textarea,th,td {padding:0;}
 i,em,cite {font-style:normal;}
