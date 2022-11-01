@@ -1,58 +1,141 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
-
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
-
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
-
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
-  -->
-  <base href="/">
-
   <meta charset="UTF-8">
-  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="A new Flutter project.">
-
-  <!-- iOS meta tags & icons -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="zero_h5">
-  <link rel="apple-touch-icon" href="icons/Icon-192.png">
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png"/>
-
-  <title>zero_h5</title>
-  <link rel="manifest" href="manifest.json">
-
-  <script>
-    // The value below is injected by flutter build, do not touch.
-    var serviceWorkerVersion = '4072260078';
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script type="text/javascript">
+    var baseUrl = '${base}';
+    adaptation(750);
+    function adaptation(size) {
+      if (document.documentElement.clientWidth > size) {
+        document.documentElement.style.fontSize = size / 7.5 + "px"
+      } else {
+        document.documentElement.style.fontSize = document.documentElement.clientWidth / 7.5 + "px"
+      }
+    }
   </script>
-  <!-- This script adds the flutter initialization JS code -->
-  <script src="flutter.js" defer></script>
+  <style>
+    input {
+      display: block;
+      height: 35px;
+      margin-bottom: 10px;
+      box-sizing: border-box;
+      width: 100%;
+    }
+    button {
+      width: 100%;
+      height: 35px;
+      background-color: blue;
+      color: #fff;
+      border: none;
+    }
+    .result {
+      display: block;
+      font-size: 16px;
+      text-align: center;
+    }
+    .result p {
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
+  <div id="app">
+    <div class="search-form">
+      <input v-model="input" placeholder="请输入查询的代码" />
+      <button @click="handleClick">查询</button>
+    </div>
+    <div class="result">
+      <p><span>总数:</span>{{total}}</p>
+      <p><span>已使用:</span>{{use}}</p>
+      <p><span>未使用:</span>{{unUse}}</p>
+      <p><span>已失效:</span>{{error}}</p>
+    </div>
+  </div>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   <script>
-    window.addEventListener('load', function(ev) {
-      // Download main.dart.js
-      _flutter.loader.loadEntrypoint({
-        serviceWorker: {
-          serviceWorkerVersion: serviceWorkerVersion,
+    const { createApp } = Vue
+    createApp({
+      data() {
+        return {
+          input: '',
+          total: 0,
+          use: 0,
+          unUse: 0,
+          error: 0,
         }
-      }).then(function(engineInitializer) {
-        return engineInitializer.initializeEngine();
-      }).then(function(appRunner) {
-        return appRunner.runApp();
-      });
-    });
+      },
+      methods: {
+        createApiUrl(modelName, whereArgs) {
+          return `https://hn216.api.yesapi.cn/?s=App.Table.FreeCount&return_data=0&model_name=${modelName}&logic=and&where=${whereArgs}&app_key=62A2F0664B024E9EC0B2B314B045E5C2`
+        },
+        handleClick() {
+          this.total = 0;
+          this.use = 0;
+          this.unUse = 0;
+          this.error = 0;
+          fetch(this.createApiUrl("f38db0297dbab9", `[["query_code", "EQ", "${this.input}"]]`))
+          .then(response => response.json())
+          .then(res => {
+            if (res.ret === 200) {
+              const data = res.data;
+              if (data.total) {
+                this.getTotal();
+                this.getUse();
+                this.getUnUse();
+                this.getError();
+              }
+            }
+          })
+        },
+        getTotal() {
+          const strArr = this.input.split('-')
+          fetch(this.createApiUrl("f4d5089c4198", `[["id", ">=", "${strArr[0]}"],["id", "<=", "${strArr[1]}"]]`))
+          .then(response => response.json())
+          .then(res => {
+            if (res.ret === 200) {
+              const data = res.data;
+              this.total = data.total;
+            }
+          })
+        },
+        getUse() {
+          const strArr = this.input.split('-')
+          fetch(this.createApiUrl("f4d5089c4198", `[["id", ">=", "${strArr[0]}"],["id", "<=", "${strArr[1]}"],["state","EQ","330"]]`))
+          .then(response => response.json())
+          .then(res => {
+            if (res.ret === 200) {
+              const data = res.data;
+              this.use = data.total;
+            }
+          })
+        },
+        getUnUse() {
+          const strArr = this.input.split('-')
+          fetch(this.createApiUrl("f4d5089c4198", `[["id", ">=", "${strArr[0]}"],["id", "<=", "${strArr[1]}"],["state","EQ","201"]]`))
+          .then(response => response.json())
+          .then(res => {
+            if (res.ret === 200) {
+              const data = res.data;
+              this.unUse = data.total;
+            }
+          })
+        },
+        getError() {
+          const strArr = this.input.split('-')
+          fetch(this.createApiUrl("f4d5089c4198", `[["id", ">=", "${strArr[0]}"],["id", "<=", "${strArr[1]}"],["state","EQ","404"]]`))
+          .then(response => response.json())
+          .then(res => {
+            if (res.ret === 200) {
+              const data = res.data;
+              this.error = data.total;
+            }
+          })
+        },
+      }
+    }).mount('#app')
   </script>
 </body>
 </html>
