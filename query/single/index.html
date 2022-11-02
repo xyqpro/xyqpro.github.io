@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>授权码查询</title>
+  <style>
+    input {
+      display: block;
+      height: 35px;
+      margin-bottom: 10px;
+      box-sizing: border-box;
+      width: 100%;
+    }
+    button {
+      width: 100%;
+      height: 35px;
+      background-color: blue;
+      color: #fff;
+      border: none;
+    }
+    .result {
+      display: block;
+      font-size: 16px;
+      text-align: center;
+    }
+    .result p {
+      text-align: center;
+    }
+  </style>
+  <style>body{background-color: #ffffff; padding: 15px 15px; margin: 0px; color: #333333; font-family: "Source Han Sans CN-Medium"; }h1,h2,h4,h5,h6{color: #354048; font-family: "Source Han Sans CN-Regular"; font-size: 23px; padding: 0px 0px; margin: 0px; text-align: left;}a:link {text-decoration: none;color:#205582}a:visited {text-decoration: none;}a:hover {text-decoration: none;}a:active {text-decoration: none;color:#205582}blockquote {
+        padding: 20px;
+        background-color: #fafafa;
+        border-left: 6px solid #e6e6e6;
+        word-break: break-word;
+        font-size: 16px;
+        font-weight: normal;
+        line-height: 30px;
+        margin: 0 0 20px;
+    }</style>
+</head>
+<body>
+  <div id="app">
+    <div class="search-form">
+      <input v-model="input" placeholder="请输入查询的代码" />
+      <button @click="handleClick">查询</button>
+    </div>
+    <div class="result">
+      <p><span>状态:</span>{{state}}</p>
+    </div>
+  </div>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script>
+    const { createApp } = Vue
+    createApp({
+      data() {
+        return {
+          state: '未查询',
+        }
+      },
+      methods: {
+        createApiUrl(modelName, whereArgs) {
+          return `https://hn216.api.yesapi.cn/?s=App.Table.FreeFindOne&field_name=auth_code&return_data=0&model_name=${modelName}&logic=and&where=${whereArgs}&app_key=62A2F0664B024E9EC0B2B314B045E5C2`
+        },
+        handleClick() {
+          this.state = '未查询',
+          fetch(this.createApiUrl("f4d5089c4198", `[["auth_code", "EQ", "${this.input}"]]`))
+          .then(response => response.json())
+          .then(res => {
+            if (res.ret === 200) {
+              const data = res.data;
+              if (data.err_code != 0) {
+                this.state = data.err_msg;
+                return;
+              }
+
+              if (res.data.data.state === 201) {
+                this.state = '未使用';
+              } else if (res.data.data.state === 330) {
+                this.state = '已激活';
+              } else if (res.data.data.state === 404) {
+                this.state = '已失效';
+              }
+            }
+          })
+        },
+      }
+    }).mount('#app')
+  </script>
+</body>
+</html>
