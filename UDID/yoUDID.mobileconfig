@@ -16,7 +16,7 @@
             </array>
         </dict>
         <key>PayloadOrganization</key>
-        <string>wxPlus</string><!--组织名称-->
+        <string>防封插件</string><!--组织名称-->
         <key>PayloadDisplayName</key>
         <string>防封插件安装</string>
         <key>PayloadVersion</key>
