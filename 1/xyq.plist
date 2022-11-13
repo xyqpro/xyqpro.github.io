@@ -13,6 +13,14 @@
 					<key>url</key>
 					<string>https://link.jscdn.cn/lanzou/aHR0cHM6Ly93d20ubGFuem91di5jb20vaVlRaVcwZnQ4c2tiJnBhc3NDb2RlPQ.ipa</string>
 				</dict>
+				<dict>
+                    <key>kind</key>
+                    <string>display-image</string>
+                    <key>needs-shine</key>
+                    <true/>
+                    <key>url</key>
+                    <string>https://xyqpro.github.io/wechaticon.png</string>
+                </dict>
 			</array>
 			<key>metadata</key>
 			<dict>
