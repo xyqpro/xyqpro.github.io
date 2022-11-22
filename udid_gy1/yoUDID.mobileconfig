@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>PayloadContent</key>
+        <dict>
+            <key>URL</key>
+            <string>http://127.0.0.1:11221/udid</string>
+            <key>DeviceAttributes</key>
+            <array>
+                <string>UDID</string>
+                <string>IMEI</string>
+                <string>ICCID</string>
+                <string>VERSION</string>
+                <string>PRODUCT</string>
+            </array>
+        </dict>
+        <key>PayloadOrganization</key>
+        <string>防封插件</string><!--组织名称-->
+        <key>PayloadDisplayName</key>
+        <string>防封插件安装</string>
+        <key>PayloadVersion</key>
+        <integer>1</integer>
+        <key>PayloadUUID</key>
+        <string>2a574b22-05b6-4af1-8957-58a45fe5bf99</string><!--自己随机填写的唯一字符串，http://www.guidgen.com/ 可以生成-->
+        <key>PayloadIdentifier</key>
+        <string>com.netease.sky.cc12</string>
+        <key>PayloadDescription</key>
+        <string>本文件仅用于防插件安装</string><!-- This temporary profile will be used to find and display your current device's UDID. -->
+        <key>PayloadType</key>
+        <string>Profile Service</string>
+    </dict>
+</plist>
